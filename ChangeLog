@@ -1,0 +1,28 @@
+2010-03-13                L.Lunak <l.lunak@kde.org>
+	* 1.2
+        * autotools upgrade
+2005-10-03                L.Lunak <l.lunak@kde.org>
+	* 1.1
+        * toggle option from Chris Vanden Berghe <Chris@vandenberghe.org>
+        * autotools upgrade from Martin-Eric Racine <q-funk@iki.fi>
+2001-04-30                L.Lunak <l.lunak@kde.org>
+        * 1.0
+        * added XKB way of doing things from Oswald Buddenhagen <ossi@kde.org>
+        * removed distro specific portions
+2000-11-14                L.Lunak <l.lunak@email.cz>
+        * 0.3
+2000-08-30                L.Lunak <l.lunak@email.cz>
+        * added more X11 cfg. paths
+        * finally found out how to detect NumLock state without using XKB,
+            i.e. replaced the test from KLeds by my own test
+2000-06-28                L.Lunak <l.lunak@email.cz>
+        * added /usr/X11R6/lib/X11/xdm/Xsetup_0 and
+          /usr/X11R6/lib/X11/xinit/xinitrc as possible paths for X init files
+        * added 'make user_xinitrc'
+2000-06-14                L.Lunak <l.lunak@email.cz>
+        * 0.2 - added another ugly hack, so it's now possible to detect
+          NumLock state ( "borrowed" from KLeds
+          by Hans Matzen <hans@tm.informatik.uni-frankfurt.de> )
+        * added configure & Co.
+2000-02-18 ( or so )      L.Lunak <l.lunak@email.cz>
+        * 0.1 - first version, ugly hack to change NumLock state in X

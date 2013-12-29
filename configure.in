@@ -1,0 +1,28 @@
+dnl $Id: configure.in,v 1.5 2001/04/10 08:45:11 seli Exp $
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(Makefile.am)
+
+AM_CONFIG_HEADER(config.h)
+
+AM_INIT_AUTOMAKE(numlockx,1.2)
+
+dnl Checks for programs.
+AC_PROG_CC
+AC_PROG_RANLIB
+AC_PATH_X
+AC_PREFIX_PROGRAM(X)
+K_PATH_X
+NM_CHECK_XKB
+NM_CHECK_XTEST
+NM_CHECK_XSETUP
+NM_CHECK_XINITRC
+
+dnl Checks for libraries.
+
+dnl Checks for header files.
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+
+dnl Checks for library functions.
+
+AC_OUTPUT(Makefile)

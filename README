@@ -1,0 +1,98 @@
+
+                                 NUMLOCKX 1.2
+                                 
+This little thingy allows you to start X with NumLock turned on ( which is
+ a feature that a lot of people seem to miss and nobody really knew how to
+ achieve this ).
+This code relies on X extensions called XTest and XKB, so you need to have
+ at least one of these X extensions installed ( you most probably do ).
+ 
+Please note that I'm not interested in problems caused by your distribution
+ being different from mine. NumLockX is written so it should work on plain X,
+ and I don't have the time to play with all distros there are, sorry.
+ If it doesn't work with your distro because they changed something
+ in the configuration files, bother them to include this package with their
+ next release ( with the necessary modifications ). It's much better that way,
+ since NumLockX requires modifications of several files and it's better if
+ they do the changes themselves. This is supposed to be the last version
+ of NumLockX anyway ( hopefully ).
+The same way, please don't send me any binary packages. Such packages simply
+ can't be good because they need to modify files that don't belong to them.
+ Please bother your favourite distribution instead.
+ 
+QUICK INSTALL :
+
+First of all, make sure this package isn't already included in your
+ distribution ( e.g. Mandrake includes it ). If you distribution already
+ includes NumLockX, use their package instead ( it needn't be necessarily
+ called NumLockX, it may be e.g. part of some other package ).
+
+Otherwise, do :
+  ./configure
+  make
+  make install
+  make xsetup
+  make xinitrc
+  
+If everything compiles, installs and works fine, you're done. Great :) .
+
+DETAILED INSTALL :
+
+First of all, make sure this package isn't already included in your
+ distribution ( e.g. Mandrake includes it ). If you distribution already
+ includes NumLockX, use it instead. To find out if your distribution includes
+ NumLockX, read the docs, or see if there's a package called 'numlock'
+ or similar.
+
+Otherwise, do :
+  ./configure
+  make
+  make install
+
+'make install' will put the executable in your <X directory>/bin directory.
+Do 'numlockx ?' for usage.
+Now you need to call it somewhere while starting X and it will always
+ make X start with NumLock turned on.
+
+If you use kdm ( xdm, whatever ... simply if X starts automatically ), add
+ a line containing '/usr/X11R6/bin/numlockx on' ( assuming that the compiled
+ binary is in /usr/X11R6/bin ) somewhere in file /etc/X11/xdm/Xsetup_0
+ ( make xsetup will do this ). For people using startx, put that line somewhere
+ at the beginning of file /etc/X11/xinit/xinitrc ( make xinitrc will do this ).
+ In case you don't know if you use kdm/xdm/... or startx, simply modify both
+ files.
+Both 'make xsetup' and 'make xinitrc' copy your original Xsetup_0 and xinitrc
+ to Xsetup_0.sav and xinitrc.sav respectively in numlockx build directory
+ in case something goes wrong.
+'make xsetup_uninstall' and 'make xinitrc_uninstall' remove changes made
+ in Xsetup_0 and xinitrc.
+
+PROBLEMS :
+
+First of all, let me repeat that I'm not interested in your distribution
+ specific problems. It works fine here, and I don't time to bother with your
+ distro, sorry. Try to bother your distribution to include this package
+ with their next release with the necessary changes.
+ 
+If it doesn't compile, there are two possibilities :
+ - You have XTest or XKB, but configure failed to find it. Do 'xdpyinfo' and
+   look for 'XTEST' or 'XKB' in the list of extensions.
+ - You have neither XTest nor XKB ... bad luck :(.
+If the executable doesn't work ... bad luck :( .
+If configure fails to find Xsetup_0 or xinitrc, because you have them elsewhere
+ than in the directories where configure script looks for them, do the change
+ manually.
+If you're not root and therefore you can modify neither Xsetup_0 nor xinitrc,
+ you can use your ~/.xinitrc ( in your home directory ). NumLock won't be
+ turned on in kdm/xdm/... but it will be turned on after starting your X
+ session ( you may use 'make user_xinitrc' to do this ).
+
+
+Thanks to
+ Oswald Buddenhagen <ossi@kde.org> for the XKB way of doing things.
+ Chris Vanden Berghe <Chris@vandenberghe.org> for toggle option.
+
+
+Lubos Lunak
+l.lunak@kde.org
+
