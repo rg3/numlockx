@@ -54,10 +54,11 @@ void usage( const char* argv0 )
     printf( "NumLockX " VERSION "\n"
         "(C) 2000-2001 Lubos Lunak <l.lunak@kde.org>\n"
         "(C) 2001      Oswald Buddenhagen <ossi@kde.org>\n\n"
-        "Usage : %s [on|off]\n"
+        "Usage : %s [on|off|toggle|state]\n"
         "on     - turns NumLock on in X ( default )\n"
         "off    - turns NumLock off in X\n"
         "toggle - toggles the NumLock on and off in X\n"
+        "state  - prints the state ( on or off ) of NumLock in X\n"
         "\n"
         , argv0 );
     }
@@ -150,6 +151,25 @@ int xkb_toggle()
         XkbLockModifiers ( dpy, XkbUseCoreKbd, mask, mask);
     return 1;
     }
+
+int xkb_state()
+    {
+    unsigned int mask;
+    unsigned int numlockState;
+    XkbStateRec xkbState;
+    if( !xkb_init())
+        return 0;
+    mask = xkb_numlock_mask();
+    if( mask == 0 )
+        return 0;
+    XkbGetState( dpy, XkbUseCoreKbd, &xkbState);
+    numlockState = xkbState.locked_mods & mask;
+    if (numlockState)
+        printf ("on\n");
+    else
+        printf ("off\n");
+    return 1;
+    }
     
 #endif
 
@@ -200,6 +220,16 @@ void xtest_toggle()
     {
     xtest_change_numlock();
     }
+
+int xtest_state()
+    {
+    if( xtest_get_numlock_state())
+        printf ("on\n");
+    else
+        printf ("off\n");
+    return 1;
+    }
+
 #endif
 
 void numlock_set_on()
@@ -235,6 +265,17 @@ void numlock_toggle()
 #endif
     }
 
+void numlock_state()
+    {
+#ifdef HAVE_XKB
+    if( xkb_state())
+        return;
+#endif
+#ifdef HAVE_XTEST
+    xtest_state();
+#endif
+    }
+
 int main( int argc, char* argv[] )
     {
     if( argc > 2 )
@@ -256,6 +297,8 @@ int main( int argc, char* argv[] )
         numlock_set_off();
     else if( strcmp( argv[ 1 ], "toggle" ) == 0 )
         numlock_toggle();
+    else if( strcmp( argv[ 1 ], "state" ) == 0 )
+        numlock_state();
     else
         {
         usage( argv[ 0 ] );
